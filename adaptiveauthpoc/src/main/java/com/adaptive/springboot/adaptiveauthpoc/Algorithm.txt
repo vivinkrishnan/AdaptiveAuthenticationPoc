@@ -1,0 +1,91 @@
+function register(attributes){
+
+    if(app does not match){
+        reject;
+        log activity for audit;
+    }else{
+        insert details into user, device & app tables;
+        //To do
+        // Check if registered location Vs GPS location Vs Location from co-ordinates need to match.
+    }
+
+}
+
+
+function login(attributes,credentials){
+
+    trust = 0;
+    
+    if(app does not match){
+        reject;
+        log activity for audit;
+    }else{
+
+        if(!isChallenged){
+
+            trust += app_match;
+
+            if(credentials match){
+                
+                trust += auth_success_strength;
+
+                Step 1: Device attributes match check.
+
+                    Step i: If device attributes match && (GPS based geo-velocity under control )
+                            device_strength_provisional = Aggregate strength of matched attributes
+                    Step ii: if ( GPS == IP based co-ordinates)
+                            device_strength = device_strength_provisional + location_match
+                            else
+                                assume spoof or VPN. Respond with a device challenge. Log activity for audit.
+                                isChallenged = true; 
+                                Return challenge
+                                Save state, wait for response. 
+
+            }else{
+
+                trust -= penalty for wrong credentials;
+                Log activity for audit, update retry count
+                isChallenged = true;
+                Challenge user.
+                Save state, wait for response.
+
+            }
+
+        } else{
+            if(device_challenge_answer_success){
+                trust += device_strength;
+
+            }
+            
+            if(credentials_challenge_answer_success){
+                trust += auth_success_strength;     
+
+            }else{
+                isChallenged = true;
+                retryCount ++;
+                Challenge user
+                Log for audit
+                Save state, wait for response. 
+            }
+
+        }    
+
+}
+
+            
+        
+            
+
+        
+
+
+        
+        
+
+    }
+
+
+
+
+
+}
